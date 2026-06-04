@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-web-service
+spec:
+  type: LoadBalancer # Azure 공인 IP를 외부 로드밸런서로 즉시 할당받음
+  ports:
+    - port: 80         # 브라우저에서 접속할 포트 (http://<공인IP>)
+      targetPort: 80   # Nginx 기본 컨테이너 포트
+  selector:
+    app: test-web
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-deployment
+spec:
+  replicas: 1 # 배포 확인용이므로 가볍게 1대만 가동
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest # 별도 빌드 필요 없는 도커허브 공식 순정 Nginx 이미지 사용
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
