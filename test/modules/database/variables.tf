@@ -8,7 +8,7 @@ variable "location" {
 
 variable "server_name" {
   type    = string
-  default = "mysql-prod-db"
+  default = "mysql-0604-db"
 }
 
 variable "mysql_version" {
