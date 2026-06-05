@@ -1,16 +1,16 @@
 resource "azurerm_mysql_flexible_server" "db" {
-  name                = var.server_name
+  name                = local.server_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  version             = var.mysql_version
+  version             = local.mysql_version
 
   administrator_login    = var.admin_login
   administrator_password = var.admin_password
 
-  sku_name = var.sku_name
+  sku_name = local.sku_name
 
   storage {
-    size_gb           = var.storage_size_gb
+    size_gb           = local.storage_size_gb
     auto_grow_enabled = false
   }
 

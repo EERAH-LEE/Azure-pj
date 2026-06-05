@@ -1,13 +1,13 @@
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = var.cluster_name
+  name                = local.cluster_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  dns_prefix          = var.dns_prefix
+  dns_prefix          = local.dns_prefix
 
   default_node_pool {
     name           = "default"
-    node_count     = var.node_count
-    vm_size        = var.vm_size
+    node_count     = local.node_count
+    vm_size        = local.vm_size
     vnet_subnet_id = var.aks_subnet_id
   }
 
@@ -17,11 +17,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = "azure"
-    service_cidr   = var.service_cidr
-    dns_service_ip = var.dns_service_ip
+    service_cidr   = local.service_cidr
+    dns_service_ip = local.dns_service_ip
   }
 
   tags = {
-    Environment = var.environment
+    Environment = local.environment
   }
 }
