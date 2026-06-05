@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: web-container
-          image: acrsue.azurecr.io/kbeauty-web:v2
+          image: acrsue.azurecr.io/kbeauty-web:v4
           ports:
             - containerPort: 80
           resources:
